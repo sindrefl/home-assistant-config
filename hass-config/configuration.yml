@@ -5,16 +5,6 @@ panel_iframe:
     icon: mdi:wrench
     url: http://192.168.2.97:3218/
     require_admin: true
-
-webostv:
-  wake_on_lan: # enables `wake_on_lan` integration
-
-  automation:
-    - alias: "Turn On Living Room TV with WakeOnLan"
-      trigger:
-        - platform: webostv.turn_on
-          entity_id: media_player.lg_webos_smart_tv
-      action:
-        - service: wake_on_lan.send_magic_packet
-          data:
-            mac: aa:bb:cc:dd:ee:ff
+    
+# enables `wake_on_lan` integration
+wake_on_lan: 
