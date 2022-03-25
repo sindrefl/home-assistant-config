@@ -1,0 +1,7 @@
+default_config:
+panel_iframe:
+  configurator:
+    title: Configurator
+    icon: mdi:wrench
+    url: http://<hostip>:3218/
+    require_admin: true

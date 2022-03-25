@@ -1,0 +1,31 @@
+version: '3'
+services:
+  homeassistant:
+    container_name: hass
+    image: homeassistant/home-assistant
+    volumes:
+      - ./hass-config:/config
+      - /etc/localtime:/etc/localtime:ro
+    restart: unless-stopped
+    network_mode: host
+  hass-configurator:
+    image: "causticlab/hass-configurator-docker:arm"
+    container_name: hass-configurator
+    restart: unless-stopped
+    ports:
+      - "3218:3218/tcp"
+    depends_on:
+      - homeassistant
+    volumes:
+      - "./configurator-config:/config"
+      - "./hass-config:/hass-config"
+    user: "${PUID}:${PGID}"
+  portainer:
+    ports:
+      - "9000:9000"
+    container_name: portainer
+    restart: unless-stopped
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./portainer/portainer_data:/data"
+    image: portainer/portainer-ce
